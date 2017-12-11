@@ -15,6 +15,9 @@
             <Label x:Name="MovieLabel"
                    Text=""
                    FontSize="Large"/>
+            <ActivityIndicator x:Name="Spinner" 
+                               Color="Red" 
+                               IsRunning="false" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
