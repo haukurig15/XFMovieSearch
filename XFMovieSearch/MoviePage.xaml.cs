@@ -5,11 +5,11 @@ using Xamarin.Forms;
 
 namespace XFMovieSearch
 {
-    public partial class MovieListPage : ContentPage
+    public partial class MoviePage : ContentPage
     {
-        public MovieListPage(List<Movie> movie)
+        public MoviePage(Movie movie)
         {
-            this.BindingContext = new MovieListViewModel(this.Navigation, movie);
+            this.BindingContext = movie;
             InitializeComponent();
         }
     }

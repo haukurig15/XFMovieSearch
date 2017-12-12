@@ -1,4 +1,5 @@
-﻿using DM.MovieApi;
+﻿using System.Collections.Generic;
+using DM.MovieApi;
 using DM.MovieApi.MovieDb.Movies;
 using MovieDatabase;
 using Xamarin.Forms;
@@ -15,7 +16,7 @@ namespace XFMovieSearch
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
             var movieService = new MovieServices(movieApi);
 
-            MainPage = new XFMovieSearchPage(movieService);
+            MainPage = new NavigationPage(new XFMovieSearchPage(movieService, new List<MovieDatabase.Movie>()));
         }
 
         protected override void OnStart()
