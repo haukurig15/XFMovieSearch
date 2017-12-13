@@ -24,7 +24,7 @@ namespace XFMovieSearch
             this.Spinner.IsRunning = true;
             this._movieList = await _movieService.getListOfPopularMovies();
             this._movieDetailList = await _movieService.getListOfMovieDetails(this._movieList);
-            await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList));
+            await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList, this._movieService));
             this.Spinner.IsRunning = false;
 
         }
