@@ -13,7 +13,8 @@ namespace MovieDatabase
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime Year { get; set; }
-        public List<string> Actors { get; set; }
+        //public List<string> Actors { get; set; }
+        public string Actors { get; set; }
         public string ImageUrl { get; set; }
         public string localImagePath { get; set; }
         public ImageSource ImageSource => ImageSource.FromUri(new Uri("https://image.tmdb.org/t/p/w500" + this.ImageUrl));

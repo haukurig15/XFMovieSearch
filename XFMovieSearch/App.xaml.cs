@@ -20,11 +20,11 @@ namespace XFMovieSearch
             var movieNavigationPage = new NavigationPage(moviePage);
             movieNavigationPage.Title = "Search";
 
-            var topRatedPage = new TopRatedPage();
+            var topRatedPage = new TopRatedPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
             var topRatedNavigationPage = new NavigationPage(topRatedPage);
             topRatedNavigationPage.Title = "Top Rated";
 
-            var popularPage = new PopularMoviesPage();
+            var popularPage = new PopularMoviesPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
             var popularNavigationPage = new NavigationPage(popularPage);
             popularNavigationPage.Title = "Popular movies";
 

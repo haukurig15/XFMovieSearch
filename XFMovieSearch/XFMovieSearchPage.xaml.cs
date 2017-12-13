@@ -22,7 +22,7 @@ namespace XFMovieSearch
         private async void GetMoviesButton_OnClicked(object sender, EventArgs e)
         {
             this.Spinner.IsRunning = true;
-            this._movieList = await _movieService.getListOfMoviesMatchingSearch(MovieEntry.Text);
+            this._movieList = await _movieService.getListOfTopRatedMovies();
             this._movieDetailList = await _movieService.getListOfMovieDetails(this._movieList);
             await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList));
             this.Spinner.IsRunning = false;

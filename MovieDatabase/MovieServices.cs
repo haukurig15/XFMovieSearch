@@ -32,19 +32,26 @@ namespace MovieDatabase
                 foreach (MovieInfo info in response.Results)
                 {
                     ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
-                    List<string> actors = new List<string>();
-                    
+                    string actors = "";
                     int number = 3;
-
                     if (cast.Item.CastMembers.Count < 3)
                     {
                         number = cast.Item.CastMembers.Count;
                     }
                     for (int i = 0; i < number; i++)
-                    {                   
-                        actors.Add(cast.Item.CastMembers[i].Name);
-                       
+                    {
+                        if (i == number - 1)
+                        {
+                            actors += cast.Item.CastMembers[i].Name;
+
+                        }
+                        else
+                        {
+                            actors += cast.Item.CastMembers[i].Name + ", ";
+
+                        }
                     }
+
 
                     responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = actors, ImageUrl = info.PosterPath});
                 }
@@ -60,7 +67,7 @@ namespace MovieDatabase
             foreach (MovieInfo info in response.Results)
             {
                 ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
-                List<string> actors = new List<string>();
+                string actors = "";
                 int number = 3;
                 if (cast.Item.CastMembers.Count < 3)
                 {
@@ -68,7 +75,49 @@ namespace MovieDatabase
                 }
                 for (int i = 0; i < number; i++)
                 {
-                    actors.Add(cast.Item.CastMembers[i].Name);
+                    if (i == number - 1)
+                    {
+                        actors += cast.Item.CastMembers[i].Name;
+
+                    }
+                    else
+                    {
+                        actors += cast.Item.CastMembers[i].Name + ", ";
+
+                    }
+                }
+
+
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = actors, ImageUrl = info.PosterPath });
+            }
+
+            return responseMovieList;
+        }
+
+        public async Task<List<Movie>> getListOfPopularMovies()
+        {
+            List<Movie> responseMovieList = new List<Movie>();
+            ApiSearchResponse<MovieInfo> response = await _movieApi.GetPopularAsync();
+            foreach (MovieInfo info in response.Results)
+            {
+                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
+                //List<string> actors = new List<string>();
+                string actors = "";
+                int number = 3;
+                if (cast.Item.CastMembers.Count < 3)
+                {
+                    number = cast.Item.CastMembers.Count;
+                }
+                for (int i = 0; i < number; i++)
+                {
+                    if(i == number - 1){
+                        actors += cast.Item.CastMembers[i].Name;
+
+                    }
+                    else {
+                        actors += cast.Item.CastMembers[i].Name + ", ";
+
+                    }
                 }
 
                 responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = actors, ImageUrl = info.PosterPath });
@@ -77,26 +126,10 @@ namespace MovieDatabase
             return responseMovieList;
         }
 
-       
 
-       /* public async Task<MovieDetail> getMovieDetails(int movieId)
-        {
-            MovieDetail movieDetailList = new MovieDetail();
-            var movie = await _movieApi.FindByIdAsync(movieId);
-            var runTime = movie.Item.Runtime.ToString();
-            movieDetailList = new MovieDetail()
-            {
-                Title = movie.Item.Title,
-                Overview = movie.Item.Overview,
-                Year = movie.Item.ReleaseDate,
-                Genre = movie.Item.Genres,
-                ImageUrl = movie.Item.PosterPath,
-                RunningTime = runTime
-            };
 
-            return movieDetailList;
-        }*/
 
+      
         public async Task<List<MovieDetail>> getListOfMovieDetails(List<Movie> movieList)
         {
             List<MovieDetail> movieDetailList = new List<MovieDetail>();
