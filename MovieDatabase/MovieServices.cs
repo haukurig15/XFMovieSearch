@@ -31,28 +31,7 @@ namespace MovieDatabase
                 ApiSearchResponse<MovieInfo> response = await _movieApi.SearchByTitleAsync(nameField);
                 foreach (MovieInfo info in response.Results)
                 {
-                   /* ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
-                    string actors = "";
-                    int number = 3;
-                    if (cast.Item.CastMembers.Count < 3)
-                    {
-                        number = cast.Item.CastMembers.Count;
-                    }
-                    for (int i = 0; i < number; i++)
-                    {
-                        if (i == number - 1)
-                        {
-                            actors += cast.Item.CastMembers[i].Name;
-
-                        }
-                        else
-                        {
-                            actors += cast.Item.CastMembers[i].Name + ", ";
-
-                        }
-                    }*/
-
-
+                 
                     responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath});
                 }
             }
@@ -89,23 +68,6 @@ namespace MovieDatabase
             return movieList;
         }
 
-        /*public async Task<List<String>> GetActors(int movieId)
-        {
-            ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movieId);
-            List<string> actors = new List<string>();
-            int number = 3;
-            if (cast.Item.CastMembers.Count < 3)
-            {
-                number = cast.Item.CastMembers.Count;
-            }
-            for (int i = 0; i < number; i++)
-            {
-                actors.Add(cast.Item.CastMembers[i].Name);
-            }
-            return actors;
-        }*/
-
-
 
         public async Task<List<Movie>> getListOfTopRatedMovies()
         {
@@ -113,29 +75,9 @@ namespace MovieDatabase
             ApiSearchResponse<MovieInfo> response = await _movieApi.GetTopRatedAsync(1);
             foreach (MovieInfo info in response.Results)
             {
-                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
-                string actors = "";
-                int number = 3;
-                if (cast.Item.CastMembers.Count < 3)
-                {
-                    number = cast.Item.CastMembers.Count;
-                }
-                for (int i = 0; i < number; i++)
-                {
-                    if (i == number - 1)
-                    {
-                        actors += cast.Item.CastMembers[i].Name;
+                
 
-                    }
-                    else
-                    {
-                        actors += cast.Item.CastMembers[i].Name + ", ";
-
-                    }
-                }
-
-
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = actors, ImageUrl = info.PosterPath });
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath });
             }
 
             return responseMovieList;
@@ -147,34 +89,13 @@ namespace MovieDatabase
             ApiSearchResponse<MovieInfo> response = await _movieApi.GetPopularAsync();
             foreach (MovieInfo info in response.Results)
             {
-                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(info.Id);
-                //List<string> actors = new List<string>();
-                string actors = "";
-                int number = 3;
-                if (cast.Item.CastMembers.Count < 3)
-                {
-                    number = cast.Item.CastMembers.Count;
-                }
-                for (int i = 0; i < number; i++)
-                {
-                    if(i == number - 1){
-                        actors += cast.Item.CastMembers[i].Name;
+                
 
-                    }
-                    else {
-                        actors += cast.Item.CastMembers[i].Name + ", ";
-
-                    }
-                }
-
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = actors, ImageUrl = info.PosterPath });
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath });
             }
 
             return responseMovieList;
         }
-
-
-
 
       
         public async Task<List<MovieDetail>> getListOfMovieDetails(List<Movie> movieList)

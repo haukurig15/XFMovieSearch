@@ -8,7 +8,7 @@ namespace XFMovieSearch
 {
     public partial class App : Application
     {
-
+        
         public App()
         {
             InitializeComponent();
@@ -16,6 +16,8 @@ namespace XFMovieSearch
             MovieDbFactory.RegisterSettings(new MovieDbSettings());
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
             var movieService = new MovieServices(movieApi);
+
+
 
             var moviePage = new XFMovieSearchPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
             var movieNavigationPage = new NavigationPage(moviePage);

@@ -21,12 +21,9 @@ namespace XFMovieSearch
 
         protected override async void OnAppearing()
         {
-            this.Spinner.IsRunning = true;
+            base.OnAppearing();
             this._movieList = await _movieService.getListOfPopularMovies();
-            this._movieDetailList = await _movieService.getListOfMovieDetails(this._movieList);
             await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList, this._movieService));
-            this.Spinner.IsRunning = false;
-
         }
     }
 }

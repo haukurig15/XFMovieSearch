@@ -27,8 +27,8 @@ namespace XFMovieSearch
             await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList, this._movieService));
             this.MovieEntry.Text = "";
             this.Spinner.IsRunning = false;
-
         }
+
 
     }
 }

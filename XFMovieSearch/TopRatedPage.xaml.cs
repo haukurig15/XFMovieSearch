@@ -19,21 +19,12 @@ namespace XFMovieSearch
             InitializeComponent();
         }
 
-       /* protected override async void OnAppearing()
-        {
-            this.Spinner.IsRunning = true;
-            this._movieList = await _movieService.getListOfTopRatedMovies();
-            this._movieDetailList = await _movieService.getListOfMovieDetails(this._movieList);
-            await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList, this._movieService));
-            this.Spinner.IsRunning = false;
-
-        }*/
-
+      
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            this._movieList = await _movieService.GetActorsForList(this._movieList);
-            InitializeComponent();
+            this._movieList = await _movieService.getListOfTopRatedMovies();
+            await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieDetailList, this._movieService));
         }
     }
 }
