@@ -38,6 +38,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="TopRatedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PopularMoviesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -53,6 +61,12 @@
     <Compile Include="MovieListViewModel.cs" />
     <Compile Include="MoviePage.xaml.cs">
       <DependentUpon>MoviePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TopRatedPage.xaml.cs">
+      <DependentUpon>TopRatedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopularMoviesPage.xaml.cs">
+      <DependentUpon>PopularMoviesPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

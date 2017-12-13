@@ -16,7 +16,25 @@ namespace XFMovieSearch
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
             var movieService = new MovieServices(movieApi);
 
-            MainPage = new NavigationPage(new XFMovieSearchPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>()));
+            var moviePage = new XFMovieSearchPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
+            var movieNavigationPage = new NavigationPage(moviePage);
+            movieNavigationPage.Title = "Search";
+
+            var topRatedPage = new TopRatedPage();
+            var topRatedNavigationPage = new NavigationPage(topRatedPage);
+            topRatedNavigationPage.Title = "Top Rated";
+
+            var popularPage = new PopularMoviesPage();
+            var popularNavigationPage = new NavigationPage(popularPage);
+            popularNavigationPage.Title = "Popular movies";
+
+            var tabbedPage = new TabbedPage();
+            tabbedPage.Children.Add(movieNavigationPage);
+            tabbedPage.Children.Add(topRatedNavigationPage);
+            tabbedPage.Children.Add(popularNavigationPage);
+
+
+            MainPage = tabbedPage;
         }
 
         protected override void OnStart()
