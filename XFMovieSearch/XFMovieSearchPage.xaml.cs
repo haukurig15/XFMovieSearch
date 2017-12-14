@@ -10,10 +10,9 @@ namespace XFMovieSearch
         private MovieServices _movieService;
         private List<Movie> _movieList;
 
-        public XFMovieSearchPage(MovieServices movieService, List<Movie> movieList)
+        public XFMovieSearchPage(MovieServices movieService)
         {
             this._movieService = movieService;
-            this._movieList = movieList;
             InitializeComponent();
         }
 

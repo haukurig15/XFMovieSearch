@@ -68,6 +68,7 @@
     <Compile Include="PopularMoviesPage.xaml.cs">
       <DependentUpon>PopularMoviesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TabPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

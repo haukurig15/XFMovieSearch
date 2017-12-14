@@ -8,10 +8,11 @@ namespace XFMovieSearch
 {
     public partial class App : Application
     {
-
-        private List<MovieDatabase.Movie> _topRatedMovies = new List<MovieDatabase.Movie>();
-        private List<MovieDatabase.Movie> _popularMovies = new List<MovieDatabase.Movie>();
+        
         private MovieServices _movieService;
+        private TopRatedPage _topRatedPage;
+        private PopularMoviesPage _popularMoviesPage;
+        private TabbedPage _tabbedPage;
 
         public App()
         {
@@ -21,29 +22,25 @@ namespace XFMovieSearch
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
             this._movieService = new MovieServices(movieApi);
 
-            LoadTopRatedMovies();
-            LoadPopularMovies();
-
-
-            var moviePage = new XFMovieSearchPage(this._movieService, new List<MovieDatabase.Movie>());
+            var moviePage = new XFMovieSearchPage(this._movieService);
             var movieNavigationPage = new NavigationPage(moviePage);
             movieNavigationPage.Title = "Search";
 
-            var topRatedPage = new TopRatedPage(this._movieService, this._topRatedMovies);
-            var topRatedNavigationPage = new NavigationPage(topRatedPage);
+            this._topRatedPage = new TopRatedPage(this._movieService);
+            var topRatedNavigationPage = new NavigationPage(this._topRatedPage);
             topRatedNavigationPage.Title = "Top Rated";
 
-            var popularPage = new PopularMoviesPage(this._movieService, this._popularMovies);
-            var popularNavigationPage = new NavigationPage(popularPage);
+            this._popularMoviesPage = new PopularMoviesPage(this._movieService);
+            var popularNavigationPage = new NavigationPage(this._popularMoviesPage);
             popularNavigationPage.Title = "Popular movies";
 
-            var tabbedPage = new TabbedPage();
-            tabbedPage.Children.Add(movieNavigationPage);
-            tabbedPage.Children.Add(topRatedNavigationPage);
-            tabbedPage.Children.Add(popularNavigationPage);
+            this._tabbedPage = new TabPage(this._topRatedPage, this._popularMoviesPage);
+            this._tabbedPage.Children.Add(movieNavigationPage);
+            this._tabbedPage.Children.Add(topRatedNavigationPage);
+            this._tabbedPage.Children.Add(popularNavigationPage);
 
 
-            MainPage = tabbedPage;
+            MainPage = this._tabbedPage;
         }
 
         protected override void OnStart()
@@ -61,15 +58,5 @@ namespace XFMovieSearch
             // Handle when your app resumes
         }
 
-
-        private async void LoadTopRatedMovies()
-        {
-            this._topRatedMovies = await this._movieService.getListOfTopRatedMovies();
-        }
-
-        private async void LoadPopularMovies()
-        {
-            this._popularMovies = await this._movieService.getListOfPopularMovies();
-        }
     }
 }

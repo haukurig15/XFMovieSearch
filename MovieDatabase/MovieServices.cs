@@ -37,35 +37,7 @@ namespace MovieDatabase
             return responseMovieList;
         }
 
-        public async Task<List<Movie>> GetActorsForList(List<Movie> movieList)
-        {
-            
-            foreach (Movie movie in movieList)
-            {
-                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
-                string actors = "";
-                int number = 3;
-                if (cast.Item.CastMembers.Count < 3)
-                {
-                    number = cast.Item.CastMembers.Count;
-                }
-                for (int i = 0; i < number; i++)
-                {
-                    if (i == number - 1)
-                    {
-                        actors += cast.Item.CastMembers[i].Name;
 
-                    }
-                    else
-                    {
-                        actors += cast.Item.CastMembers[i].Name + ", ";
-
-                    }
-                }
-                movie.Actors = actors;
-            }
-            return movieList;
-        }
 
 
         public async Task<List<Movie>> getListOfTopRatedMovies()
@@ -128,6 +100,65 @@ namespace MovieDatabase
             movie.RunningTime = movieDetail.Item.Runtime.ToString();
 
             return movie;
+        }
+
+        public async Task<List<Movie>> GetActorsForList(List<Movie> movieList)
+        {
+
+            foreach (Movie movie in movieList)
+            {
+                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
+                string actors = "";
+                int number = 3;
+                if (cast.Item.CastMembers.Count < 3)
+                {
+                    number = cast.Item.CastMembers.Count;
+                }
+                for (int i = 0; i < number; i++)
+                {
+                    if (i == number - 1)
+                    {
+                        actors += cast.Item.CastMembers[i].Name;
+
+                    }
+                    else
+                    {
+                        actors += cast.Item.CastMembers[i].Name + ", ";
+
+                    }
+                }
+                movie.Actors = actors;
+            }
+            return movieList;
+        }
+
+        public async Task<string> GetActors(Movie movie)
+        {
+
+
+            ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
+            string actors = "";
+            int number = 3;
+            if (cast.Item.CastMembers.Count < 3)
+            {
+                number = cast.Item.CastMembers.Count;
+            }
+            for (int i = 0; i < number; i++)
+            {
+                if (i == number - 1)
+                {
+                    actors += cast.Item.CastMembers[i].Name;
+
+                }
+                else
+                {
+                    actors += cast.Item.CastMembers[i].Name + ", ";
+
+                }
+            }
+
+            
+            return actors;
         }
 
     } 

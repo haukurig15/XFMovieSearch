@@ -9,20 +9,27 @@ namespace XFMovieSearch
     {
         private MovieServices _movieService;
         private List<Movie> _movieList;
+        private MovieListViewModel _viewModel;
 
-        public TopRatedPage(MovieServices movieService, List<Movie> movieList)
+        public TopRatedPage(MovieServices movieService)
         {
             this._movieService = movieService;
-            this._movieList = movieList;
+            this._viewModel = new MovieListViewModel(this.Navigation, this._movieList, this._movieService);
+            this.BindingContext = this._viewModel;
             InitializeComponent();
         }
 
-      
-        protected override async void OnAppearing()
+        public void LoadMovies()
+        {
+            this._viewModel.LoadTopRatedMovies();
+        }
+
+        /*protected override async void OnAppearing()
         {
             base.OnAppearing();
             //this._movieList = await _movieService.getListOfTopRatedMovies();
             await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieService));
-        }
+            InitializeComponent();
+        }*/
     }
 }
