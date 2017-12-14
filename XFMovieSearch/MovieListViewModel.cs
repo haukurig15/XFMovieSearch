@@ -15,13 +15,13 @@ namespace XFMovieSearch
         private INavigation _navigation;
         private Movie _selectedMovie;
         private List<Movie> _movieList;
-        private List<MovieDetail> _movieDetailList;
+        private MovieServices _movieService;
 
-        public MovieListViewModel(INavigation navigation, List<Movie> movieList,List<MovieDetail> movieDetailList)
+        public MovieListViewModel(INavigation navigation, List<Movie> movieList, MovieServices movieService)
         {
             this._navigation = navigation;
             this._movieList = movieList;
-            this._movieDetailList = movieDetailList;
+            this._movieService = movieService;
         }
 
         public List<Movie> Movie
@@ -35,16 +35,7 @@ namespace XFMovieSearch
             }
         }
 
-        public List<MovieDetail> MovieDetail
-        {
-            get => this._movieDetailList;
 
-            set
-            {
-                this._movieDetailList = value;
-                OnPropertyChanged();
-            }
-        }
 
         public Movie SelectedMovie
         {
@@ -55,7 +46,7 @@ namespace XFMovieSearch
                 if (value != null)
                 {
                     this._selectedMovie = value;
-                    this._navigation.PushAsync(new MoviePage(this._selectedMovie, this._movieDetailList), true);
+                    this._navigation.PushAsync(new MoviePage(this._selectedMovie, this._movieService), true);
                 }
             }
         }

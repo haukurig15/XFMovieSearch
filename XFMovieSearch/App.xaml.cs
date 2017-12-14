@@ -8,26 +8,32 @@ namespace XFMovieSearch
 {
     public partial class App : Application
     {
-        
+
+        private List<MovieDatabase.Movie> _topRatedMovies = new List<MovieDatabase.Movie>();
+        private List<MovieDatabase.Movie> _popularMovies = new List<MovieDatabase.Movie>();
+        private MovieServices _movieService;
+
         public App()
         {
             InitializeComponent();
 
             MovieDbFactory.RegisterSettings(new MovieDbSettings());
             var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
-            var movieService = new MovieServices(movieApi);
+            this._movieService = new MovieServices(movieApi);
+
+            LoadTopRatedMovies();
+            LoadPopularMovies();
 
 
-
-            var moviePage = new XFMovieSearchPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
+            var moviePage = new XFMovieSearchPage(this._movieService, new List<MovieDatabase.Movie>());
             var movieNavigationPage = new NavigationPage(moviePage);
             movieNavigationPage.Title = "Search";
 
-            var topRatedPage = new TopRatedPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
+            var topRatedPage = new TopRatedPage(this._movieService, this._topRatedMovies);
             var topRatedNavigationPage = new NavigationPage(topRatedPage);
             topRatedNavigationPage.Title = "Top Rated";
 
-            var popularPage = new PopularMoviesPage(movieService, new List<MovieDatabase.Movie>(), new List<MovieDetail>());
+            var popularPage = new PopularMoviesPage(this._movieService, this._popularMovies);
             var popularNavigationPage = new NavigationPage(popularPage);
             popularNavigationPage.Title = "Popular movies";
 
@@ -53,6 +59,17 @@ namespace XFMovieSearch
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+
+        private async void LoadTopRatedMovies()
+        {
+            this._topRatedMovies = await this._movieService.getListOfTopRatedMovies();
+        }
+
+        private async void LoadPopularMovies()
+        {
+            this._popularMovies = await this._movieService.getListOfPopularMovies();
         }
     }
 }

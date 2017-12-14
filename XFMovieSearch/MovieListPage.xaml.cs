@@ -9,15 +9,13 @@ namespace XFMovieSearch
     {
         private List<Movie> _movieList;
         private MovieServices _movieService;
-        private List<MovieDetail> _movieDetailList;
 
-        public MovieListPage(List<Movie> movieList, List<MovieDetail> movieDetailList, MovieServices movieService)
+        public MovieListPage(List<Movie> movieList, MovieServices movieService)
         {
             
             this._movieList = movieList;
-            this._movieDetailList = movieDetailList;
             this._movieService = movieService;
-            this.BindingContext = new MovieListViewModel(this.Navigation, this._movieList, this._movieDetailList);
+            this.BindingContext = new MovieListViewModel(this.Navigation, this._movieList, this._movieService);
             InitializeComponent();
         }
 

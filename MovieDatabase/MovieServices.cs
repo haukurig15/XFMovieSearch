@@ -11,7 +11,6 @@ namespace MovieDatabase
     public class MovieServices
     {
         private IApiMovieRequest _movieApi;
-        //private int i = 0;
 
         public MovieServices(IApiMovieRequest movieApi)
         {
@@ -31,8 +30,8 @@ namespace MovieDatabase
                 ApiSearchResponse<MovieInfo> response = await _movieApi.SearchByTitleAsync(nameField);
                 foreach (MovieInfo info in response.Results)
                 {
-                 
-                    responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath});
+                    
+                    responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", Actors = "", ImageUrl = info.PosterPath});
                 }
             }
             return responseMovieList;
@@ -77,7 +76,7 @@ namespace MovieDatabase
             {
                 
 
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath });
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", Actors = "", ImageUrl = info.PosterPath });
             }
 
             return responseMovieList;
@@ -91,14 +90,15 @@ namespace MovieDatabase
             {
                 
 
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = info.Title, Year = info.ReleaseDate, Actors = "", ImageUrl = info.PosterPath });
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
+                    Actors = "", ImageUrl = info.PosterPath, Overview = "", RunningTime = "" });
             }
 
             return responseMovieList;
         }
 
       
-        public async Task<List<MovieDetail>> getListOfMovieDetails(List<Movie> movieList)
+       /* public async Task<List<MovieDetail>> getListOfMovieDetails(List<Movie> movieList)
         {
             List<MovieDetail> movieDetailList = new List<MovieDetail>();
             foreach (Movie movie in movieList)
@@ -116,6 +116,18 @@ namespace MovieDatabase
                 });
             }
             return movieDetailList;
+        }*/
+
+        public async Task<Movie> getListOfMovieDetails(Movie movie)
+        {
+            
+            var movieDetail = await _movieApi.FindByIdAsync(movie.Id);
+
+            movie.Overview = movieDetail.Item.Overview;
+            movie.Genre = movieDetail.Item.Genres;
+            movie.RunningTime = movieDetail.Item.Runtime.ToString();
+
+            return movie;
         }
 
     } 
