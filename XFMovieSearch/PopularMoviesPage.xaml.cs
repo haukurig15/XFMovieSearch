@@ -8,13 +8,12 @@ namespace XFMovieSearch
     public partial class PopularMoviesPage : ContentPage
     {
         private MovieServices _movieService;
-        //private List<Movie> _movieList;
         private MovieListViewModel _viewModel;
 
         public PopularMoviesPage(MovieServices movieService)
         {
             this._movieService = movieService;
-            this._viewModel = new MovieListViewModel(this.Navigation, new List<Movie>(), this._movieService);
+            this._viewModel = new MovieListViewModel(this.Navigation, this._movieService);
             this.BindingContext = this._viewModel;
             InitializeComponent();
         }

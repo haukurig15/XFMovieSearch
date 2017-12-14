@@ -13,22 +13,18 @@ namespace XFMovieSearch
         public XFMovieSearchPage(MovieServices movieService)
         {
             this._movieService = movieService;
-            this._viewModel = new MovieListViewModel(this.Navigation, new List<Movie>(), this._movieService);
+            this._viewModel = new MovieListViewModel(this.Navigation, this._movieService);
             this.BindingContext = this._viewModel;
             InitializeComponent();
         }
 
-        private async void GetMoviesButton_OnClicked(object sender, EventArgs e)
+        private async void OnSearchBarButtonPressed(object sender, EventArgs args)
         {
             this.Spinner.IsRunning = true;
             this._viewModel.Movie = await _movieService.getListOfMoviesMatchingSearch(MovieEntry.Text);
-
-            //InitializeComponent();
-            //await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieService));
-            //this.MovieEntry.Text = "";
+            this._viewModel.LoadCast();
             this.Spinner.IsRunning = false;
         }
-
 
     }
 }

@@ -9,15 +9,8 @@
                      VerticalOptions="Start"
                      Spacing="10">
             <SearchBar x:Name="MovieEntry" 
-                Placeholder="Search for word in movie"/>
-            
-            <Button x:Name="GetMoviesButton"
-                    Text="Get Movies" 
-                    BorderColor="Color.Gray"
-                    Clicked="GetMoviesButton_OnClicked"/>
-            <Label x:Name="MovieLabel"
-                   Text=""
-                   FontSize="Large"/>
+                Placeholder="Search for word in movie"
+                SearchButtonPressed="OnSearchBarButtonPressed"/>
             <ActivityIndicator x:Name="Spinner" 
                                Color="Red" 
                                IsRunning="false" />

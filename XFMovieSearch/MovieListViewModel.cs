@@ -14,13 +14,12 @@ namespace XFMovieSearch
     {
         private INavigation _navigation;
         private Movie _selectedMovie;
-        private List<Movie> _movieList;
+        private List<Movie> _movieList = new List<Movie>();
         private MovieServices _movieService;
 
-        public MovieListViewModel(INavigation navigation, List<Movie> movieList, MovieServices movieService)
+        public MovieListViewModel(INavigation navigation, MovieServices movieService)
         {
             this._navigation = navigation;
-            this._movieList = movieList;
             this._movieService = movieService;
         }
 
@@ -63,17 +62,14 @@ namespace XFMovieSearch
             return this._movieList;
         }*/
 
-        public async Task LoadCast()
+        public async void LoadCast()
         {
-
             foreach (var movie in this._movieList)
             {
                 movie.Actors = await this._movieService.GetActors(movie);
                 Movie = _movieList;
             }
-
         }
-
 
         public async void LoadTopRatedMovies()
         {
