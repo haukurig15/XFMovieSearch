@@ -36,7 +36,6 @@ namespace XFMovieSearch
         }
 
 
-
         public Movie SelectedMovie
         {
             get => this._selectedMovie;
@@ -51,12 +50,11 @@ namespace XFMovieSearch
             }
         }
 
-        public async Task LoadCast()
+
+        public async Task<List<Movie>> LoadCast()
         {
-            foreach (var movie in Movie)
-            {
-                movie.Actors = await this._movieService.GetActors(movie);
-            }
+            Movie = await this._movieService.GetActorsForList(Movie);
+            return Movie;
         }
 
         public async void LoadTopRatedMovies()

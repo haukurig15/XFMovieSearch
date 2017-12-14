@@ -28,5 +28,12 @@ namespace XFMovieSearch
         {
             this.ListView.SelectedItem = null;
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            this._viewModel.Movie = await this._viewModel.LoadCast();
+            InitializeComponent();
+        }
     }
 }
