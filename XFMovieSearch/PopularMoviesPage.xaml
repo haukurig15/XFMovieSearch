@@ -8,7 +8,8 @@
                   HasUnevenRows="True"
                   ItemsSource="{Binding Movie}"
                   SeparatorColor="#DDDDDD"
-                  SelectedItem="{Binding SelectedMovie}">
+                  SelectedItem="{Binding SelectedMovie}"
+                  ItemSelected="Handle_ItemSelected">
             <ListView.RowHeight>
                 <OnPlatform x:TypeArguments="x:Int32">
                     <On Platform="iOS">80</On>

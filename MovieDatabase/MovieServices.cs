@@ -31,7 +31,8 @@ namespace MovieDatabase
                 foreach (MovieInfo info in response.Results)
                 {
                     
-                    responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", Actors = "", ImageUrl = info.PosterPath});
+                    responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", 
+                        Actors = "", ImageUrl = info.PosterPath, Overview = info.Overview});
                 }
             }
             return responseMovieList;
@@ -46,7 +47,8 @@ namespace MovieDatabase
             {
                 
 
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", Actors = "", ImageUrl = info.PosterPath });
+                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", 
+                    Actors = "", ImageUrl = info.PosterPath, Overview = info.Overview });
             }
 
             return responseMovieList;
@@ -60,21 +62,42 @@ namespace MovieDatabase
             {
                 
 
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
-                    Actors = "", ImageUrl = info.PosterPath, Overview = "", RunningTime = "" });
+                responseMovieList.Add(new Movie() {
+                    Id = info.Id,
+                    Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
+                    Actors = "",
+                    ImageUrl = info.PosterPath,
+                    Overview = info.Overview, RunningTime = "" });
             }
 
             return responseMovieList;
         }
 
+
         public async Task<Movie> getListOfMovieDetails(Movie movie)
         {
-            
-            var movieDetail = await _movieApi.FindByIdAsync(movie.Id);
 
-            movie.Overview = movieDetail.Item.Overview;
+            var movieDetail = await _movieApi.FindByIdAsync(movie.Id);
             movie.Genre = movieDetail.Item.Genres;
-            movie.RunningTime = movieDetail.Item.Runtime.ToString();
+
+            var genre = "";
+            for (int i = 0; i < movie.Genre.Count(); i++)
+            {
+                if (i == movie.Genre.Count() - 1)
+                {
+                    genre += movie.Genre[i].Name;
+                }
+                else
+                {
+                    genre += movie.Genre[i].Name + ", ";
+                }
+            }
+            movie.Genres = genre;
+            //movie.Overview = movieDetail.Item.Overview;
+            movie.RunningTime = movieDetail.Item.Runtime.ToString() + " min";
+            movie.Tagline = movieDetail.Item.Tagline;
+            movie.BackdropPath = movieDetail.Item.BackdropPath;
+
 
             return movie;
         }
@@ -108,6 +131,7 @@ namespace MovieDatabase
             }
             return movieList;
         }
+
 
         public async Task<string> GetActors(Movie movie)
         {

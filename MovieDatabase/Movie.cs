@@ -17,8 +17,12 @@ namespace MovieDatabase
         public string ImageUrl { get; set; }
         public ImageSource ImageSource => ImageSource.FromUri(new Uri("https://image.tmdb.org/t/p/w500" + this.ImageUrl));
         public IReadOnlyList<Genre> Genre { get; set; }
+        public string Genres { get; set; }
         public string RunningTime { get; set; }
         public string Overview { get; set; }
+        public string BackdropPath { get; set; }
+        public ImageSource BackdropPathSource => ImageSource.FromUri(new Uri("https://image.tmdb.org/t/p/w500" + this.BackdropPath));
+        public string Tagline { get; set; }
        
     }
 }

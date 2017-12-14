@@ -21,7 +21,8 @@
                   SelectedItem="{Binding SelectedMovie}"
                   IsPullToRefreshEnabled="True"
                   RefreshCommand="{Binding RefreshCommand}"
-                  IsRefreshing="{Binding IsRefreshing}">
+                  IsRefreshing="{Binding IsRefreshing}"
+                  ItemSelected="Handle_ItemSelected">
                 
             <ListView.RowHeight>
                 <OnPlatform x:TypeArguments="x:Int32">

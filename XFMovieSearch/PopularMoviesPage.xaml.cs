@@ -24,11 +24,9 @@ namespace XFMovieSearch
 
         }
 
-        /*protected override async void OnAppearing()
+        void Handle_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            base.OnAppearing();
-            this._movieList = await _movieService.getListOfPopularMovies();
-            await this.Navigation.PushAsync(new MovieListPage(this._movieList, this._movieService));
-        }*/
+            this.ListView.SelectedItem = null;
+        }
     }
 }
