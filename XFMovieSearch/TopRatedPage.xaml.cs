@@ -8,18 +8,18 @@ namespace XFMovieSearch
     public partial class TopRatedPage : ContentPage
     {
         private MovieServices _movieService;
-        private List<Movie> _movieList;
+       // private List<Movie> _movieList;
         private MovieListViewModel _viewModel;
 
         public TopRatedPage(MovieServices movieService)
         {
             this._movieService = movieService;
-            this._viewModel = new MovieListViewModel(this.Navigation, this._movieList, this._movieService);
+            this._viewModel = new MovieListViewModel(this.Navigation, new List<Movie>(), this._movieService);
             this.BindingContext = this._viewModel;
             InitializeComponent();
         }
 
-        public void LoadMovies()
+        public void LoadTopRatedMovies()
         {
             this._viewModel.LoadTopRatedMovies();
         }

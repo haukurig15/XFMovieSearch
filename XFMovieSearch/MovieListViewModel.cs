@@ -52,26 +52,40 @@ namespace XFMovieSearch
         }
 
 
-        public async Task<List<Movie>> LoadCast() 
+       /* public async Task<List<Movie>> LoadCast() 
         {
 
-            foreach(var movie in this._movieList){
+            foreach (var movie in this._movieList)
+            {
                 movie.Actors = await this._movieService.GetActors(movie);
+                Movie = _movieList;
             }
             return this._movieList;
+        }*/
+
+        public async Task LoadCast()
+        {
+
+            foreach (var movie in this._movieList)
+            {
+                movie.Actors = await this._movieService.GetActors(movie);
+                Movie = _movieList;
+            }
+
         }
+
 
         public async void LoadTopRatedMovies()
         {
             
             Movie = await _movieService.getListOfTopRatedMovies();
-       
+           
         }
 
-        public async void LoadTopRatedMovies()
+        public async void LoadPopularMovies()
         {
 
-            Movie = await _movieService.getListOfTopRatedMovies();
+            Movie = await _movieService.getListOfPopularMovies();
 
         }
 

@@ -22,11 +22,11 @@ namespace XFMovieSearch
         }
 
 
-        protected override async void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            this._movieList = await this._viewModel.LoadCast();
+            await this._viewModel.LoadCast();
             InitializeComponent();
 
             /*foreach(var movie in this._movieList){

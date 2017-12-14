@@ -16,7 +16,8 @@ namespace XFMovieSearch
 
         protected override void OnAppearing()
         {
-            this._topRatedPage.LoadMovies();
+            this._topRatedPage.LoadTopRatedMovies();
+            this._popularMovies.LoadPopularMovies();
         }
 
     }
