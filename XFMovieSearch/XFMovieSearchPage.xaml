@@ -18,7 +18,11 @@
                   HasUnevenRows="True"
                   ItemsSource="{Binding Movie}"
                   SeparatorColor="#DDDDDD"
-                  SelectedItem="{Binding SelectedMovie}">
+                  SelectedItem="{Binding SelectedMovie}"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}">
+                
             <ListView.RowHeight>
                 <OnPlatform x:TypeArguments="x:Int32">
                     <On Platform="iOS">80</On>

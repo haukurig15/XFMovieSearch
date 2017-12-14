@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using MovieDatabase;
 using Xamarin.Forms;
 
@@ -62,12 +63,12 @@ namespace XFMovieSearch
             return this._movieList;
         }*/
 
-        public async void LoadCast()
+        public async Task LoadCast()
         {
-            foreach (var movie in this._movieList)
+            foreach (var movie in Movie)
             {
                 movie.Actors = await this._movieService.GetActors(movie);
-                Movie = _movieList;
+
             }
         }
 
@@ -84,6 +85,33 @@ namespace XFMovieSearch
             Movie = await _movieService.getListOfPopularMovies();
 
         }
+
+        private bool _isRefreshing = false;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsRefreshing = true;
+
+                    await LoadCast();
+
+                    IsRefreshing = false;
+                });
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
