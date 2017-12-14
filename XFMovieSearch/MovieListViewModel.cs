@@ -68,8 +68,8 @@ namespace XFMovieSearch
             foreach (var movie in Movie)
             {
                 movie.Actors = await this._movieService.GetActors(movie);
-
             }
+
         }
 
         public async void LoadTopRatedMovies()
