@@ -1,19 +1,12 @@
-﻿using DM.MovieApi.MovieDb.Movies;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using DM.MovieApi.MovieDb.Genres;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using MovieDatabase;
 
 namespace MovieDatabase
 {
-    
 
     public class Movie  : INotifyPropertyChanged
     {
@@ -25,7 +18,6 @@ namespace MovieDatabase
 
         public int Id { get; set; }
         public string Title { get; set; }
-        //public string Actors { get; set; }
 
         public string Actors
         {

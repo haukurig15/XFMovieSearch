@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MovieDatabase;
+﻿using MovieDatabase;
 using Xamarin.Forms;
 using XFMovieSearch.ViewModel;
 
@@ -28,12 +26,5 @@ namespace XFMovieSearch.Pages
         {
             this.ListView.SelectedItem = null;
         }
-
-       /* protected override async void OnAppearing()
-        {
-            base.OnAppearing();
-            this._viewModel.Movie = await this._viewModel.LoadCast();
-            InitializeComponent();
-        }*/
     }
 }

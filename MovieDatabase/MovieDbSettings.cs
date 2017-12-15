@@ -1,5 +1,4 @@
 ﻿using DM.MovieApi;
-using System;
 
 namespace MovieDatabase
 {
@@ -8,7 +7,6 @@ namespace MovieDatabase
     {
 
         string ApiKey = "1ec1f1033a55a5f869c57ae78169f79e";
-        
 
         string ApiUrl = "http://api.themoviedb.org/3/";
 

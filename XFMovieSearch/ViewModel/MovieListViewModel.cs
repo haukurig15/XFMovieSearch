@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MovieDatabase;
@@ -50,13 +47,6 @@ namespace XFMovieSearch.ViewModel
                 }
             }
         }
-
-
-        /*public async Task<List<Movie>> LoadCast()
-        {
-            Movie = await this._movieService.GetActorsForList(Movie);
-            return Movie;
-        }*/
 
         public async Task LoadCast()
         {

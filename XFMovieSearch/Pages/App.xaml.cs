@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using DM.MovieApi;
+﻿using DM.MovieApi;
 using DM.MovieApi.MovieDb.Movies;
 using MovieDatabase;
 using Xamarin.Forms;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using MovieDatabase;
+﻿using MovieDatabase;
 using Xamarin.Forms;
 
 namespace XFMovieSearch.Pages

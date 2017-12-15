@@ -1,5 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+
 namespace XFMovieSearch.Pages
 {
     public class TabPage : TabbedPage
