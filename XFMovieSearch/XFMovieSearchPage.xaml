@@ -12,9 +12,9 @@
             <SearchBar x:Name="MovieEntry" 
                 Placeholder="Search for word in movie"
                 SearchButtonPressed="OnSearchBarButtonPressed"
-                BackgroundColor="Black"/>
+                BackgroundColor="White"/>
             <ActivityIndicator x:Name="Spinner" 
-                               Color="Red" 
+                               Color="White" 
                                IsRunning="false"
                                Scale="2"/>
             <ListView x:Name="ListView"
