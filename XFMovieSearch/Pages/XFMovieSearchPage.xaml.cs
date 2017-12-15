@@ -24,7 +24,8 @@ namespace XFMovieSearch.Pages
             this.Spinner.IsRunning = true;
             this._viewModel.Movie = await _movieService.getListOfMoviesMatchingSearch(MovieEntry.Text);
             this.Spinner.IsRunning = false;
-            this._viewModel.Movie = await this._viewModel.LoadCast();
+            this._viewModel.LoadCast();
+            //this._viewModel.Movie = await this._viewModel.LoadCast();
             InitializeComponent();
         }
 

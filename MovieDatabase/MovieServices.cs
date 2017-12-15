@@ -19,7 +19,7 @@ namespace MovieDatabase
 
         public async Task<List<Movie>> getListOfMoviesMatchingSearch(string nameField)
         {
-            List<Movie> responseMovieList = new List<Movie>();           
+            List<Movie> responseMovieList = new List<Movie>();
 
             if (nameField.Length == 0)
             {
@@ -28,11 +28,21 @@ namespace MovieDatabase
             else
             {
                 ApiSearchResponse<MovieInfo> response = await _movieApi.SearchByTitleAsync(nameField);
-                foreach (MovieInfo info in response.Results)
+                var res = response?.Results;
+                if (res != null)
                 {
-                    
-                    responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", 
-                        Actors = "", ImageUrl = info.PosterPath, Overview = info.Overview});
+                    foreach (MovieInfo info in response.Results)
+                    {
+
+                        responseMovieList.Add(new Movie("")
+                        {
+                            Id = info.Id,
+                            Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
+                            Actors = "",
+                            ImageUrl = info.PosterPath,
+                            Overview = info.Overview
+                        });
+                    }
                 }
             }
             return responseMovieList;
@@ -43,14 +53,24 @@ namespace MovieDatabase
         {
             List<Movie> responseMovieList = new List<Movie>();
             ApiSearchResponse<MovieInfo> response = await _movieApi.GetTopRatedAsync(1);
-            foreach (MovieInfo info in response.Results)
+            var res = response?.Results;
+            if (res != null)
             {
-                
 
-                responseMovieList.Add(new Movie() { Id = info.Id, Title = $"{info.Title} ({info.ReleaseDate:yyyy})", 
-                    Actors = "", ImageUrl = info.PosterPath, Overview = info.Overview });
+                foreach (MovieInfo info in response.Results)
+                {
+
+                    responseMovieList.Add(new Movie("")
+                    {
+                        Id = info.Id,
+                        Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
+                        Actors = "",
+                        ImageUrl = info.PosterPath,
+                        Overview = info.Overview
+                    });
+                }
+
             }
-
             return responseMovieList;
         }
 
@@ -58,18 +78,24 @@ namespace MovieDatabase
         {
             List<Movie> responseMovieList = new List<Movie>();
             ApiSearchResponse<MovieInfo> response = await _movieApi.GetPopularAsync();
-            foreach (MovieInfo info in response.Results)
+            var res = response?.Results;
+            if (res != null)
             {
-                
+                foreach (MovieInfo info in response.Results)
+                {
 
-                responseMovieList.Add(new Movie() {
-                    Id = info.Id,
-                    Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
-                    Actors = "",
-                    ImageUrl = info.PosterPath,
-                    Overview = info.Overview, RunningTime = "" });
+
+                    responseMovieList.Add(new Movie("")
+                    {
+                        Id = info.Id,
+                        Title = $"{info.Title} ({info.ReleaseDate:yyyy})",
+                        Actors = "",
+                        ImageUrl = info.PosterPath,
+                        Overview = info.Overview,
+                        RunningTime = ""
+                    });
+                }
             }
-
             return responseMovieList;
         }
 
@@ -93,7 +119,6 @@ namespace MovieDatabase
                 }
             }
             movie.Genres = genre;
-            //movie.Overview = movieDetail.Item.Overview;
             movie.RunningTime = movieDetail.Item.Runtime.ToString() + " min";
             movie.Tagline = movieDetail.Item.Tagline;
             movie.BackdropPath = movieDetail.Item.BackdropPath;
@@ -104,62 +129,38 @@ namespace MovieDatabase
 
         public async Task<List<Movie>> GetActorsForList(List<Movie> movieList)
         {
-
-            foreach (Movie movie in movieList)
+            if (movieList.Count() != 0)
             {
-                ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
-                string actors = "";
-                int number = 3;
-                if (cast.Item.CastMembers.Count < 3)
+                foreach (Movie movie in movieList)
                 {
-                    number = cast.Item.CastMembers.Count;
-                }
-                for (int i = 0; i < number; i++)
-                {
-                    if (i == number - 1)
+                    ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
+                    string actors = "";
+                    int number = 3;
+                    var res = cast?.Item?.CastMembers;
+                    if (res != null)
                     {
-                        actors += cast.Item.CastMembers[i].Name;
+                        if (cast.Item.CastMembers.Count < 3)
+                        {
+                            number = cast.Item.CastMembers.Count;
+                        }
+                        for (int i = 0; i < number; i++)
+                        {
+                            if (i == number - 1)
+                            {
+                                actors += cast.Item.CastMembers[i].Name;
 
-                    }
-                    else
-                    {
-                        actors += cast.Item.CastMembers[i].Name + ", ";
+                            }
+                            else
+                            {
+                                actors += cast.Item.CastMembers[i].Name + ", ";
 
+                            }
+                        }
+                        movie.Actors = actors;
                     }
                 }
-                movie.Actors = actors;
             }
             return movieList;
-        }
-
-
-        public async Task<string> GetActors(Movie movie)
-        {
-
-
-            ApiQueryResponse<MovieCredit> cast = await _movieApi.GetCreditsAsync(movie.Id);
-            string actors = "";
-            int number = 3;
-            if (cast.Item.CastMembers.Count < 3)
-            {
-                number = cast.Item.CastMembers.Count;
-            }
-            for (int i = 0; i < number; i++)
-            {
-                if (i == number - 1)
-                {
-                    actors += cast.Item.CastMembers[i].Name;
-
-                }
-                else
-                {
-                    actors += cast.Item.CastMembers[i].Name + ", ";
-
-                }
-            }
-
-            
-            return actors;
         }
 
     } 

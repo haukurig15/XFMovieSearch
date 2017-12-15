@@ -52,16 +52,23 @@ namespace XFMovieSearch.ViewModel
         }
 
 
-        public async Task<List<Movie>> LoadCast()
+        /*public async Task<List<Movie>> LoadCast()
         {
             Movie = await this._movieService.GetActorsForList(Movie);
             return Movie;
+        }*/
+
+        public async Task LoadCast()
+        {
+            await this._movieService.GetActorsForList(Movie);
         }
+
 
         public async void LoadTopRatedMovies()
         {
             
             Movie = await _movieService.getListOfTopRatedMovies();
+            await LoadCast();
            
         }
 
@@ -69,6 +76,7 @@ namespace XFMovieSearch.ViewModel
         {
 
             Movie = await _movieService.getListOfPopularMovies();
+            await LoadCast();
 
         }
 
