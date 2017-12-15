@@ -104,26 +104,29 @@ namespace MovieDatabase
         {
 
             var movieDetail = await _movieApi.FindByIdAsync(movie.Id);
-            movie.Genre = movieDetail.Item.Genres;
-
-            var genre = "";
-            for (int i = 0; i < movie.Genre.Count(); i++)
+            var res = movieDetail?.Item;
+            if (res != null)
             {
-                if (i == movie.Genre.Count() - 1)
+                movie.Genre = movieDetail.Item.Genres;
+                var genre = "";
+
+                for (int i = 0; i < movie.Genre.Count(); i++)
                 {
-                    genre += movie.Genre[i].Name;
+                    if (i == movie.Genre.Count() - 1)
+                    {
+                        genre += movie.Genre[i].Name;
+                    }
+                    else
+                    {
+                        genre += movie.Genre[i].Name + ", ";
+                    }
                 }
-                else
-                {
-                    genre += movie.Genre[i].Name + ", ";
-                }
+                movie.Genres = genre;
+                movie.RunningTime = movieDetail.Item.Runtime.ToString() + " min";
+                movie.Tagline = movieDetail.Item.Tagline;
+                movie.BackdropPath = movieDetail.Item.BackdropPath;
+
             }
-            movie.Genres = genre;
-            movie.RunningTime = movieDetail.Item.Runtime.ToString() + " min";
-            movie.Tagline = movieDetail.Item.Tagline;
-            movie.BackdropPath = movieDetail.Item.BackdropPath;
-
-
             return movie;
         }
 
