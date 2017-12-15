@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MovieDatabase;
 using Xamarin.Forms;
+using XFMovieSearch.Pages;
 
-namespace XFMovieSearch
+namespace XFMovieSearch.ViewModel
 {
     public class MovieListViewModel : INotifyPropertyChanged
     {

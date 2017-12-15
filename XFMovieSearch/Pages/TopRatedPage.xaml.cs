@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using MovieDatabase;
 using Xamarin.Forms;
+using XFMovieSearch.ViewModel;
 
-namespace XFMovieSearch
+namespace XFMovieSearch.Pages
 {
     public partial class TopRatedPage : ContentPage
     {

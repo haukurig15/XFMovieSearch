@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="XFMovieSearch.TopRatedPage"
-    Title="Top rated"
+    xmlns:local="clr-namespace:XFMovieSearch" 
+    x:Class="XFMovieSearch.Pages.XFMovieSearchPage"
+    Title="Movie search"
     BackgroundColor="Black">
 	<ContentPage.Content>
-        <ListView x:Name="ListView"
+        <StackLayout Margin="20,40,20,20"
+                     VerticalOptions="Start"
+                     Spacing="10">
+            <SearchBar x:Name="MovieEntry" 
+                Placeholder="Search for word in movie"
+                SearchButtonPressed="OnSearchBarButtonPressed"
+                BackgroundColor="White"/>
+            <ActivityIndicator x:Name="Spinner" 
+                               Color="White" 
+                               IsRunning="false"
+                               Scale="2"/>
+            <ListView x:Name="ListView"
                   HasUnevenRows="True"
                   ItemsSource="{Binding Movie}"
                   SeparatorColor="#DDDDDD"
@@ -56,5 +68,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

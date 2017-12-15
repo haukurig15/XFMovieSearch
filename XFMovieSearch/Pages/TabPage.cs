@@ -1,6 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
-namespace XFMovieSearch
+namespace XFMovieSearch.Pages
 {
     public class TabPage : TabbedPage
     {

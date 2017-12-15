@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MovieDatabase;
 using Xamarin.Forms;
 
-namespace XFMovieSearch
+namespace XFMovieSearch.Pages
 {
     public partial class MoviePage : ContentPage
     {

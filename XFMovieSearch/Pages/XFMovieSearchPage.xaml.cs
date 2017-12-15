@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using MovieDatabase;
 using Xamarin.Forms;
+using XFMovieSearch.ViewModel;
 
-namespace XFMovieSearch
+namespace XFMovieSearch.Pages
 {
     public partial class XFMovieSearchPage : ContentPage
     {
@@ -31,8 +32,6 @@ namespace XFMovieSearch
         {
             this.ListView.SelectedItem = null;
         }
-
-
 
     }
 }

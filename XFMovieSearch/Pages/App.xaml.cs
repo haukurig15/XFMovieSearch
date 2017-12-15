@@ -4,7 +4,7 @@ using DM.MovieApi.MovieDb.Movies;
 using MovieDatabase;
 using Xamarin.Forms;
 
-namespace XFMovieSearch
+namespace XFMovieSearch.Pages
 {
     public partial class App : Application
     {
